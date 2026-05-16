@@ -1,4 +1,5 @@
 import { Bot, Context, InlineKeyboard, Keyboard } from "grammy";
+import { MainKeyboard } from "../keyboards/main.keyboard";
 
 class BotCommands {
     private bot: Bot<Context>;
@@ -10,20 +11,14 @@ class BotCommands {
     render(): void {
 
         this.startCommand();
-        
+
     }
 
     private startCommand(): void {
         this.bot.command("start", async (ctx) => {
-            const keyboard = new Keyboard()
-                .text(" ")
-                .text("Налаштування")
-                .row()
-                .text("Допомога")
-                .resized();
-
-            await ctx.reply("hello", {
-                reply_markup: keyboard
+            await ctx.reply("👋 <b>Привіт!</b>\n\nОбери потрібну дію в меню нижче 👇", {
+                reply_markup: MainKeyboard.getMainMenu(),
+                parse_mode: "HTML"
             })
         })
     }
